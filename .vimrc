@@ -1,7 +1,6 @@
-	" [x] compile
 	" [x] statusline
 	" [x] comments (not necessary at last)
-	" [x] autoclosing
+	" [x] autoclosingDone!
 	" [x] competitive tricks + debug comments
 	" [x] encircling
 
@@ -96,7 +95,10 @@ set pumheight=20
 
 " CLANG SETTINGS
 let g:clang_library_path='/usr/lib'
-let g:clang_complete_auto=0
+let g:clang_complete_auto=1
+let g:clang_complete_copen=1
+let g:clang_close_preview=1
+let g:clang_complete_macros=1
 autocmd FileType cpp :let g:clang_user_options = '-std=c++11'
 let g:clang_jumpto_declaration_key = ''
 
@@ -108,7 +110,11 @@ set background=dark
 autocmd VimEnter * EnableCommenting
 autocmd BufEnter * let b:doxygen_in_out=1
 
-" CPP COMPILATION
+" COMPILATION
+autocmd BufEnter * :nnoremap <F12> :make<CR>
+let g:tex_flavor = "latex"
+autocmd FileType tex :compiler tex
+autocmd FileType python :compiler pyunit
 autocmd FileType cpp :set makeprg=g++\ %\ -o\ %:r\ -Wall\ -std=c++11\ -DLOCAL\ -g\ -O2
 autocmd FileType cpp :nnoremap <F12> :w <bar> make <bar> !./%:r<CR>
 
@@ -128,8 +134,8 @@ nnoremap <leader>tt :TagbarToggle<CR>
 " -----SHORTCUTS-----
 
 " SETTING WORKING DIRECTORY
-autocmd VimEnter    :lcd %:p:h
-nnoremap <silent> <leader>cd :lcd %:p:h<CR>
+autocmd VimEnter :lcd %:p:h
+nnoremap <silent> <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " GRACEFULLY EXIT
 nnoremap <leader>q  :qa
@@ -193,7 +199,7 @@ nnoremap <silent> <leader>gd :call GoToDefinitions()<CR>
 nnoremap <silent> <leader>gm :call GoToMain()<CR>
 
 " CREATE TAGS FOR PROJECT
-command! NodeTagConfig lcd %:p:h <bar> !cp ~/.vim/skeleton.nodejs.ctags ./.ctags
+command! NodeTagConfig !cp ~/.vim/skeleton.nodejs.ctags ./.ctags && ctags -R .
 nnoremap <silent> <leader>ct :!echo "CREATING TAGS..." && ctags -R .<CR>
 
 " OPEN TODO / FIXME LIST

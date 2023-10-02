@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define rep(i, a, n) for (size_t i=(size_t)a; i<=(size_t)n; ++i)/*{{{*/
-#define per(i, a, n) for (size_t i=(size_t)n; i>=(size_t)a; --i)
+#define rep(i, a, n) for (int i=(int)a; i<=(int)n; ++i)/*{{{*/
+#define per(i, a, n) for (int i=(int)n; i>=(int)a; --i)
 #define pb push_back
 #define sz size()
 #define ITER(a) (a).begin(), (a).end()
@@ -19,10 +19,8 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<vector<int>> vvi;
 
-template <typename T>
-static inline void amin(T& a, T b) { if (a > b) a = b; }
-template <typename T>
-static inline void amax(T& a, T b) { if (a < b) a = b; }
+#define MIN(a,b) do { if (a > b) a = b; } while (0)
+#define MAX(a,b) do { if (a < b) a = b; } while (0)
 /*}}}*/
 
 int main ()
